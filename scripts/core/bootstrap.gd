@@ -11,6 +11,7 @@ const TEXT_DIM := Color("65908f")
 
 var _elapsed := 0.0
 var _motes: Array[Dictionary] = []
+var _accept_input := false
 
 
 func _ready() -> void:
@@ -27,11 +28,24 @@ func _ready() -> void:
 			"alpha": rng.randf_range(0.16, 0.52),
 		})
 	queue_redraw()
+	if "--phase1-playtest" in OS.get_cmdline_user_args():
+		_begin_phase1_playtest.call_deferred()
+
+
+func _begin_phase1_playtest() -> void:
+	await get_tree().create_timer(1.0).timeout
+	get_tree().change_scene_to_file("res://scenes/test/player_movement_lab.tscn")
 
 
 func _process(delta: float) -> void:
 	_elapsed += delta
+	_accept_input = _elapsed >= 0.65
 	queue_redraw()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if _accept_input and event.is_action_pressed("ui_accept"):
+		get_tree().change_scene_to_file("res://scenes/test/player_movement_lab.tscn")
 
 
 func _notification(what: int) -> void:
@@ -169,6 +183,8 @@ func _draw_identity(viewport_size: Vector2) -> void:
 	draw_rect(Rect2(load_x, load_y, load_width, 1.0), Color(0.42, 0.81, 0.74, 0.13))
 	var sweep := 0.35 + 0.65 * (0.5 + 0.5 * sin(_elapsed * 0.65))
 	draw_rect(Rect2(load_x, load_y, load_width * sweep, 1.0), Color(0.46, 0.95, 0.81, 0.68))
+	var prompt_alpha := 0.46 + 0.18 * sin(_elapsed * 2.0)
+	_draw_centered_text(font, "ENTER  /  SPACE    BEGIN MOVEMENT LAB", viewport_size.y * 0.925, int(12.0 * scale_factor), Color(0.62, 0.84, 0.82, prompt_alpha))
 
 
 func _draw_crest(center: Vector2, scale_factor: float) -> void:

@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/test/movement_lab.gd" id="1_lab"]
+[ext_resource type="Script" path="res://scripts/test/lab_backdrop.gd" id="2_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/test/lab_hud.gd" id="4_hud"]
+
+[sub_resource type="RectangleShape2D" id="GroundA"]
+size = Vector2(1900, 240)
+
+[sub_resource type="RectangleShape2D" id="GroundB"]
+size = Vector2(1060, 240)
+
+[sub_resource type="RectangleShape2D" id="GroundC"]
+size = Vector2(1310, 240)
+
+[sub_resource type="RectangleShape2D" id="GroundD"]
+size = Vector2(1400, 240)
+
+[sub_resource type="RectangleShape2D" id="SmallStep"]
+size = Vector2(160, 40)
+
+[sub_resource type="RectangleShape2D" id="MediumStep"]
+size = Vector2(160, 90)
+
+[sub_resource type="RectangleShape2D" id="RaisedPlatform"]
+size = Vector2(380, 38)
+
+[node name="PlayerMovementLab" type="Node2D"]
+script = ExtResource("1_lab")
+
+[node name="BackdropLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Backdrop" type="Control" parent="BackdropLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_backdrop")
+
+[node name="GroundA" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundA"]
+position = Vector2(550, 740)
+shape = SubResource("GroundA")
+
+[node name="GroundB" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundB"]
+position = Vector2(2170, 740)
+shape = SubResource("GroundB")
+
+[node name="GroundC" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundC"]
+position = Vector2(3545, 775)
+shape = SubResource("GroundC")
+
+[node name="GroundD" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundD"]
+position = Vector2(4900, 740)
+shape = SubResource("GroundD")
+
+[node name="SmallStep" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallStep"]
+position = Vector2(700, 600)
+shape = SubResource("SmallStep")
+
+[node name="MediumStep" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MediumStep"]
+position = Vector2(1060, 575)
+shape = SubResource("MediumStep")
+
+[node name="RaisedPlatform" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RaisedPlatform"]
+position = Vector2(2230, 519)
+shape = SubResource("RaisedPlatform")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(220, 620)
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="HUD" type="Control" parent="HUDLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_hud")

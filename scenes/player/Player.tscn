@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/player/hero_rig.gd" id="2_rig"]
+[ext_resource type="Script" path="res://scripts/player/player_camera.gd" id="3_camera"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
+radius = 17.0
+height = 84.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 1
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -42)
+shape = SubResource("CapsuleShape2D_player")
+
+[node name="HeroRig" type="Node2D" parent="."]
+script = ExtResource("2_rig")
+
+[node name="CameraRig" type="Camera2D" parent="."]
+position = Vector2(0, -166)
+enabled = true
+position_smoothing_enabled = false
+script = ExtResource("3_camera")
