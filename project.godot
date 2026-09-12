@@ -1,0 +1,32 @@
+; Project Skyroot
+; Phase 0 foundation configuration for Godot 4.x Standard.
+
+config_version=5
+
+[application]
+
+config/name="Project Skyroot"
+run/main_scene="res://scenes/bootstrap/bootstrap.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/size/resizable=true
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=0
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+environment/defaults/default_clear_color=Color(0.025, 0.047, 0.086, 1)
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
